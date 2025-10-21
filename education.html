@@ -1,0 +1,102 @@
+<!-- Save as education.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Educational Requirements — Engineering & Technical</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+  <style>
+    /* Reuse the same visual system but slightly simplified for subpages */
+    :root{--bg1:#05030a; --bg2:#0b0b1f; --glass-border:rgba(255,255,255,0.04); --neon-cyan:#00fff7; --neon-mag:#ff00c8; --max:1100px;}
+    *{box-sizing:border-box}
+    html,body{height:100%; margin:0; font-family:"Poppins",sans-serif; background:linear-gradient(180deg,var(--bg1),var(--bg2)); color:#e6eef8}
+    #particles-js{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.9}
+    .page{position:relative; z-index:1; min-height:100vh; padding:28px 18px 60px}
+    header{width:100%; max-width:var(--max); margin:8px auto 20px; display:flex; align-items:center; justify-content:space-between; padding:12px; border-radius:12px; background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid var(--glass-border)}
+    .logo{width:56px; height:56px; border-radius:12px; overflow:hidden}
+    .title{font-family:"Orbitron",sans-serif; font-size:1.05rem}
+    .back{background:linear-gradient(90deg,var(--neon-cyan),var(--neon-mag)); color:#041026; padding:10px 12px; border-radius:10px; font-weight:700; border:0; cursor:pointer}
+    main{width:100%; max-width:var(--max); margin:20px auto; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px; padding:22px; border:1px solid var(--glass-border)}
+    h1{font-family:"Orbitron"; margin-top:0}
+    .section{margin-bottom:18px}
+    .glass-table{width:100%; border-collapse:collapse}
+    .glass-table th, .glass-table td{padding:10px; border:1px solid rgba(255,255,255,0.04); text-align:left}
+    footer{width:100%; max-width:var(--max); margin:20px auto 10px; text-align:center; color:rgba(230,238,255,0.8)}
+    .nav-row{display:flex; gap:10px; justify-content:flex-end}
+    .nav-row a{color:inherit; text-decoration:none; background:transparent; border:1px solid rgba(255,255,255,0.04); padding:8px 10px; border-radius:8px}
+    /* fade in */
+    .fade{opacity:0; transform:translateY(12px); transition:all .6s cubic-bezier(.2,.9,.2,1)}
+    .fade.visible{opacity:1; transform:translateY(0)}
+    @media(max-width:900px){ header{flex-direction:column; gap:10px} .nav-row{justify-content:center} }
+  </style>
+</head>
+<body>
+  <div id="particles-js" aria-hidden="true"></div>
+  <div class="page">
+    <header>
+      <div style="display:flex; gap:12px; align-items:center">
+        <div class="logo"><img src="eat.png" alt="" style="width:100%; height:100%; object-fit:cover"></div>
+        <div>
+          <div class="title">Educational Requirements</div>
+          <div style="font-size:0.85rem; color:rgba(230,238,255,0.85)">Engineering & Technical Careers</div>
+        </div>
+      </div>
+      <div class="nav-row">
+        <a href="index.html">← Back to Home</a>
+        <a href="skills.html">Next: Skills →</a>
+      </div>
+    </header>
+
+    <main class="fade" id="maincard" role="main">
+      <h1>Educational Requirements in Engineering and Technical Fields</h1>
+
+      <div class="section">
+        <h3>1. Minimum Qualifications Required</h3>
+        <p>Engineering careers in India follow a tiered educational pathway:</p>
+        <table class="glass-table" role="table" aria-label="Educational Pathway">
+          <thead><tr><th>Level</th><th>Typical Qualification</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>10+2 / Higher Secondary</td><td>Completion of 10+2 (Science)</td><td>Physics, Chemistry, Mathematics (Computer Science recommended for IT/electronics)</td></tr>
+            <tr><td>Undergraduate</td><td>B.E. / B.Tech / B.Sc (Engineering)</td><td>4 years; core for technical roles; many specializations</td></tr>
+            <tr><td>Postgraduate</td><td>M.Tech / M.Sc / MBA (Tech Management)</td><td>2 years; for advanced R&D and management</td></tr>
+            <tr><td>Doctoral</td><td>Ph.D.</td><td>Research-intensive careers, academia, innovation</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section">
+        <h3>2. Recommended Subjects & College Courses</h3>
+        <ul>
+          <li><strong>At School:</strong> Physics, Chemistry, Mathematics; Computer Science for IT track; Biology for biomedical engineering.</li>
+          <li><strong>At College:</strong> Core courses per branch (Thermodynamics, Structural Analysis, Data Structures, Circuits, Signal Processing, etc.).</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>3. Diplomas & Certifications</h3>
+        <p>Short-term diplomas and certifications add employability: CAD/CAM, Six Sigma, AWS/Azure, PLC, Embedded Systems, AI/ML courses.</p>
+      </div>
+
+      <div class="section">
+        <h3>4. Internships, Apprenticeships, Training</h3>
+        <p>Internships (3–12 months) and apprenticeships (Apprenticeship Act) with companies (Tata, L&T, ISRO, DRDO, Infosys) give hands-on experience and often lead to placement offers.</p>
+      </div>
+
+      <p><strong>Summary:</strong> Minimum path: 10+2 (Science) → B.E./B.Tech → (M.Tech/Ph.D optional). Combine formal degrees with certifications and internships for best outcomes.</p>
+    </main>
+
+    <footer>© Zainabia English Medium School — Educational Requirements</footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{
+      // particles
+      if(window.particlesJS) particlesJS('particles-js', {"particles":{"number":{"value":60},"color":{"value":["#7c3aed","#3b82f6","#06b6d4"]},"size":{"value":3},"line_linked":{"enable":true,"opacity":0.06}},"interactivity":{"events":{"onhover":{"enable":true,"mode":"repulse"}}},"retina_detect":true});
+      // fade in
+      setTimeout(()=>document.getElementById('maincard').classList.add('visible'),120);
+    });
+  </script>
+</body>
+</html>

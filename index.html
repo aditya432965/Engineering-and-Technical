@@ -1,1455 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Engineering & Technical</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Animate.css for smooth animations -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Engineering & Technical Careers — Landing</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Particles lib (deferred) -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+    :root{
+      --bg-1:#05030a;
+      --bg-2:#0b0b1f;
+      --glow-cyan: rgba(0,255,247,0.12);
+      --neon-cyan: #00fff7;
+      --neon-mag:  #ff00c8;
+      --card: rgba(255,255,255,0.03);
+      --glass-border: rgba(255,255,255,0.06);
+      --accent1: #7c3aed;
+      --accent2: #2563eb;
+      --max: 1200px;
     }
+    html,body{height:100%; margin:0; font-family:"Poppins",system-ui,Segoe UI,Roboto,Arial; background: linear-gradient(180deg,var(--bg-1), var(--bg-2)); color:#e6eef8; -webkit-font-smoothing:antialiased;}
+    /* Particles canvas (under everything) */
+    #particles-js{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.85; filter: blur(0.6px);}
 
-    body {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      overflow-x: hidden;
+    /* Page shell */
+    .page {position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:28px 20px 80px;}
+
+    /* top bar */
+    .topbar {width:100%; max-width:var(--max); display:flex; align-items:center; justify-content:space-between; gap:12px; margin:8px auto 22px; padding:12px 16px; border-radius:12px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid var(--glass-border); box-shadow: 0 8px 32px rgba(2,6,23,0.6); backdrop-filter: blur(6px);}
+    .brand {display:flex; align-items:center; gap:12px}
+    .brand .logo {width:48px; height:48px; border-radius:10px; overflow:hidden; box-shadow:0 10px 30px rgba(7,10,25,0.6), 0 0 28px rgba(0,255,247,0.06); border:1px solid rgba(255,255,255,0.04)}
+    .brand h1 {font-family:"Orbitron", "Poppins", sans-serif; font-size:1.05rem; margin:0; color: #ffffff; letter-spacing:0.6px}
+    .brand p {margin:0; font-size:0.78rem; color:rgba(230,238,255,0.85)}
+
+    /* particle toggle */
+    .controls {display:flex; align-items:center; gap:10px}
+    .toggle-btn {background:transparent; border:1px solid rgba(255,255,255,0.06); color:#e6eef8; padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:600; transition:all .18s ease}
+    .toggle-btn:hover {transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,0.5)}
+
+    /* hero */
+    .hero {width:100%; max-width:var(--max); display:grid; grid-template-columns: 420px 1fr; gap:26px; align-items:center; margin:10px auto; padding:20px; border-radius:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.04); box-shadow: 0 18px 60px rgba(2,6,23,0.6); backdrop-filter: blur(6px); }
+    .banner-wrap {position:relative; padding:10px; border-radius:12px; background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.2)); border:1px solid rgba(255,255,255,0.03); box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);}
+    .banner {width:100%; height:260px; border-radius:10px; overflow:hidden; display:flex; align-items:center; justify-content:center; border:2px solid rgba(255,255,255,0.03); box-shadow: 0 14px 40px rgba(0,0,0,0.7); background:linear-gradient(90deg, rgba(124,58,237,0.06), rgba(37,99,235,0.05));}
+    .banner img {width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s ease, filter .4s ease; filter: drop-shadow(0 18px 60px rgba(0,0,0,0.6));}
+    .banner:hover img {transform:scale(1.035) rotate(-0.2deg);}
+
+    /* neon frame */
+    .neon-frame {position:absolute; inset:8px; border-radius:8px; pointer-events:none; background: linear-gradient(120deg, rgba(0,255,247,0.04), rgba(255,0,200,0.03)); box-shadow: 0 8px 30px rgba(0,255,247,0.04); mix-blend-mode: screen;}
+
+    .hero .content {padding:4px 8px}
+    .hero h2 {font-family:"Orbitron", sans-serif; font-weight:700; margin:6px 0 8px; font-size:2.1rem; color:#fff; text-shadow: 0 10px 40px rgba(0,0,0,0.6)}
+    .hero p {margin:0 0 8px; color:rgba(230,238,255,0.92); font-size:1rem}
+    .hero .actions {display:flex; gap:12px; margin-top:12px; flex-wrap:wrap}
+
+    /* main button grid */
+    .grid {width:100%; max-width:var(--max); margin:28px auto 0; display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; align-items:stretch}
+    .card-btn {display:flex; flex-direction:column; gap:10px; padding:18px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.04); box-shadow: 0 14px 40px rgba(2,6,23,0.6); transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .18s ease;}
+    .card-btn:hover{transform:translateY(-10px) scale(1.02); box-shadow: 0 30px 80px rgba(0,0,0,0.8);}
+
+    .card-btn .title {font-family:"Orbitron"; font-size:1.05rem; color:#fff}
+    .card-btn .desc {font-size:0.92rem; color:rgba(230,238,255,0.86)}
+    .glow {position:relative; overflow:visible}
+    .glow:after {content:''; position:absolute; inset:auto -20% -20% -20%; height:80%; background: radial-gradient(closest-side, rgba(0,255,247,0.06), transparent 40%); filter: blur(30px); z-index:-1; pointer-events:none}
+
+    /* single-row full width CTA (below) */
+    .cta-row {width:100%; max-width:var(--max); margin:22px auto 0; display:flex; justify-content:center}
+    .big-cta {padding:16px 22px; border-radius:12px; font-weight:700; font-size:1.05rem; cursor:pointer; border:0;
+      background: linear-gradient(90deg,var(--neon-cyan), var(--neon-mag)); color:#051026; box-shadow: 0 18px 60px rgba(0,255,247,0.08), 0 6px 24px rgba(255,0,200,0.06)}
+    .big-cta:hover{transform:translateY(-6px) scale(1.02); box-shadow: 0 28px 90px rgba(0,255,247,0.12);}
+
+    /* footer */
+    footer {width:100%; max-width:var(--max); margin:36px auto 10px; padding:18px; border-radius:10px; text-align:center; color:rgba(230,238,255,0.9); font-size:0.95rem; border:1px solid rgba(255,255,255,0.03); background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008)); box-shadow: 0 12px 40px rgba(0,0,0,0.6)}
+
+    /* responsive */
+    @media (max-width:980px){
+      .grid {grid-template-columns: repeat(2, 1fr)}
+      .hero{grid-template-columns: 1fr; gap:14px}
+      .banner{height:220px}
     }
-
-    /* Particle background canvas */
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
+    @media (max-width:680px){
+      .grid {grid-template-columns: 1fr}
+      .brand h1 {font-size:0.95rem}
+      .hero h2 {font-size:1.6rem}
+      .banner{height:190px}
     }
-
-    header {
-      width: 100%;
-      height: 300px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 50px;
-      text-align: center;
-      background-color: rgba(0,0,0,0.2);
-    }
-
-    header h1 {
-      font-size: 3rem;
-      text-shadow: 2px 2px 15px rgba(0,0,0,0.5);
-      animation: bounceIn 1.5s;
-    }
-
-    .button-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      max-width: 1200px;
-      padding: 0 20px;
-    }
-
-    .btn {
-      background: linear-gradient(45deg, #ff6a00, #ee0979, #f5af19, #ff6a00);
-      border: none;
-      padding: 18px 30px;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.5s ease;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-      background-size: 300% 300%;
-      animation: gradientBG 8s ease infinite;
-    }
-
-    @keyframes gradientBG {
-      0% {background-position:0% 50%;}
-      50% {background-position:100% 50%;}
-      100% {background-position:0% 50%;}
-    }
-
-    .btn:hover {
-      transform: translateY(-7px) scale(1.05);
-      box-shadow: 0 15px 25px rgba(0,0,0,0.5);
-      text-shadow: 0 0 10px #fff;
-    }
-
-    /* Content sections */
-    .content-section {
-      max-width: 1000px;
-      background: rgba(0,0,0,0.4);
-      padding: 20px 30px;
-      margin: 20px 0;
-      border-radius: 15px;
-      display: none;
-      animation: fadeIn 0.8s forwards;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    @media (max-width: 768px) {
-      .btn {
-        padding: 15px 20px;
-        font-size: 1rem;
-      }
-    }
-
   </style>
 </head>
 <body>
 
-  <!-- Particle background -->
-  <div id="particles-js"></div>
+  <!-- Particles -->
+  <div id="particles-js" aria-hidden="true"></div>
 
-  <!-- Top Image Space -->
-  <header>
-    <h1>Engineering And Technical</h1>
-  </header>
+  <div class="page">
 
-  <!-- Buttons -->
-  <div class="button-container">
-    <button class="btn" data-target="home">Overview</button>
-    <button class="btn" data-target="edu">Educational Requirements</button>
-    <button class="btn" data-target="skills">Skills and Abilities Needed</button>
-    <button class="btn" data-target="env">Work Environment</button>
-    <button class="btn" data-target="growth">Career Path and Growth Opportunities</button>
-    <button class="btn" data-target="salary">Salary and Benefits</button>
-    <button class="btn" data-target="demand">Employment Outlook and Demand</button>
-    <button class="btn" data-target="proscons">Pros and Cons</button>
-    <button class="btn" data-target="rolemodel">Famous Personalities / Role Model</button>
-    <button class="btn" data-target="institutions">Institutions and Training Centers</button>
-    <button class="btn" data-target="associations">Professional Associations and Networks</button>
-    <button class="btn" data-target="impact">Social Impact and Ethical Considerations</button>
+    <!-- Top bar -->
+    <div class="topbar" role="banner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <img src="eat.png" alt="" style="width:100%; height:100%; object-fit:cover; display:block;">
+        </div>
+        <div>
+          <h1>Engineering &amp; Technical</h1>
+          <p>Futuristic • Energetic • Professional</p>
+        </div>
+      </div>
+
+      <div class="controls" role="toolbar" aria-label="Controls">
+        <button class="toggle-btn" id="toggleParticles" aria-pressed="true">Particles: On</button>
+        <button class="toggle-btn" id="openExplore" onclick="document.getElementById('grid').scrollIntoView({behavior:'smooth'})">Explore Sections</button>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero" role="region" aria-label="Hero">
+      <div class="banner-wrap">
+        <div class="banner" aria-hidden="false">
+          <img src="eat.png" alt="Engineering & Technical banner image" onerror="this.style.filter='grayscale(20%)';">
+          <div class="neon-frame" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="content">
+        <h2>Career Overview: Engineering & Technical Fields</h2>
+        <p>Apply science, mathematics, and technology to design, develop and improve infrastructure, machines, software and systems. A practical, creative and high-impact career path — building the future.</p>
+        <div class="actions">
+          <button class="toggle-btn" onclick="document.getElementById('education-link').click()">Quick: Education</button>
+          <button class="toggle-btn" onclick="document.getElementById('skills-link').click()">Quick: Skills</button>
+        </div>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+          <div class="badge" style="padding:8px 10px; border-radius:8px; background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); font-weight:700; color:#e6eef8">Problem Solving</div>
+          <div class="badge" style="padding:8px 10px; border-radius:8px; background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); font-weight:700; color:#e6eef8">Innovation</div>
+          <div class="badge" style="padding:8px 10px; border-radius:8px; background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); font-weight:700; color:#e6eef8">Hands-on Learning</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Button grid -->
+    <div id="grid" class="grid" role="navigation" aria-label="Section Links">
+      <a id="education-link" class="card-btn glow" href="education.html" title="Educational Requirements">
+        <div class="title">Educational Requirements</div>
+        <div class="desc">Pathways, degrees, certifications & internships for engineers.</div>
+      </a>
+
+      <a id="skills-link" class="card-btn glow" href="skills.html" title="Skills & Abilities">
+        <div class="title">Skills & Abilities</div>
+        <div class="desc">Technical skills, soft skills and personal traits employers seek.</div>
+      </a>
+
+      <a class="card-btn glow" href="work-environment.html" title="Work Environment">
+        <div class="title">Work Environment</div>
+        <div class="desc">Typical workplaces, hours, team structure and field conditions.</div>
+      </a>
+
+      <a class="card-btn glow" href="career-path.html" title="Career Path">
+        <div class="title">Career Path & Growth</div>
+        <div class="desc">Entry roles → senior → leadership and entrepreneurship routes.</div>
+      </a>
+
+      <a class="card-btn glow" href="salary.html" title="Salary & Benefits">
+        <div class="title">Salary & Benefits</div>
+        <div class="desc">Starting pay, mid/senior ranges and employee benefits in India.</div>
+      </a>
+
+      <a class="card-btn glow" href="demand.html" title="Employment Outlook">
+        <div class="title">Employment Outlook</div>
+        <div class="desc">High-growth areas, trends, and national & global opportunities.</div>
+      </a>
+
+      <a class="card-btn glow" href="pros-cons.html" title="Pros and Cons">
+        <div class="title">Pros & Cons</div>
+        <div class="desc">Advantages, challenges and work-life balance considerations.</div>
+      </a>
+
+      <a class="card-btn glow" href="role-models.html" title="Famous Personalities">
+        <div class="title">Famous Personalities</div>
+        <div class="desc">Inspiring engineers and leaders — national & global role models.</div>
+      </a>
+
+      <a class="card-btn glow" href="institutions.html" title="Institutions">
+        <div class="title">Institutions & Training</div>
+        <div class="desc">Top colleges, online learning platforms & scholarships.</div>
+      </a>
+
+      <a class="card-btn glow" href="associations.html" title="Associations & Networks">
+        <div class="title">Professional Associations</div>
+        <div class="desc">IEI, IEEE, ISTE and international professional bodies.</div>
+      </a>
+
+      <a class="card-btn glow" href="social-impact.html" title="Social Impact">
+        <div class="title">Social Impact & Ethics</div>
+        <div class="desc">How engineering affects society and ethical responsibilities.</div>
+      </a>
+
+      <a class="card-btn glow" href="graph.html" title="Graph / Stats Overview">
+        <div class="title">Graph / Stats Overview</div>
+        <div class="desc">Visualize trends, performance and current progress in engineering fields.</div>
+     </a>
+
+
+    </div>
+
+    <div class="cta-row">
+      <button class="big-cta" onclick="alert('Open the relevant subpage or use the grid links to continue')">Open a section to read more →</button>
+    </div>
+
+    <footer>
+      <div style="margin-bottom:6px; font-weight:700">“Engineering is imagination made real.”</div>
+      <div style="font-size:0.86rem; color:rgba(230,238,255,0.7)">Designed by Zainabia English Medium School — edit by Aditya Raut [to make website contact to raut68222971@gmail.com].</div>
+    </footer>
+
   </div>
 
-  <div id="home" class="content-section">
-    <h2>Definition and Description of the Field</h2>
-    <p>Engineering and Technical fields involve the application of scientific, mathematical, and technological principles to design, develop, maintain, and improve structures, machines, systems, software, and processes. It is a broad domain that combines theory and practice to solve practical problems and create innovative solutions in various industries.</p>
-    <p>In India, engineering is considered a key driver of industrial growth, technological advancement, and infrastructure development. The field is constantly evolving due to advances in digital technology, AI, robotics, renewable energy, and manufacturing innovations.</p>
-    <p><strong>Key aspects:</strong></p>
-    <ul>
-      <li>Problem-solving oriented</li>
-      <li>Focuses on designing, developing, testing, and maintaining solutions</li>
-      <li>Often requires collaboration with multidisciplinary teams</li>
-    </ul>
-
-    <h2>Nature of Work</h2>
-    <p>Professionals in engineering and technical fields are involved in creative, analytical, and practical tasks, including:</p>
-    <ul>
-      <li><strong>Design and Development:</strong> Creating new products, machinery, software, or infrastructure solutions using engineering principles.</li>
-      <li><strong>Testing and Quality Control:</strong> Ensuring that designs and products meet safety, efficiency, and reliability standards.</li>
-      <li><strong>Research and Innovation:</strong> Developing advanced technologies, improving materials, or optimizing processes.</li>
-      <li><strong>Maintenance and Troubleshooting:</strong> Maintaining machines, systems, or networks and solving technical issues.</li>
-      <li><strong>Project Management:</strong> Planning, coordinating, and supervising engineering projects from concept to completion.</li>
-      <li><strong>Consulting and Advisory:</strong> Providing expert guidance on technical solutions, feasibility, and cost optimization.</li>
-    </ul>
-    <p>For example, a civil engineer designs buildings or roads, an IT engineer develops software solutions, and a mechanical engineer designs machinery or manufacturing processes.</p>
-
-    <h2>Typical Roles and Job Titles</h2>
-    <ul>
-      <li><strong>Mechanical and Civil Engineering:</strong> Mechanical Engineer, Civil Engineer, Structural Engineer, Project Engineer, Design Engineer</li>
-      <li><strong>Electrical, Electronics, and Computer Engineering:</strong> Electrical Engineer, Electronics Engineer, Embedded Systems Engineer, Software Engineer/Developer, Network Engineer</li>
-      <li><strong>Industrial and Manufacturing Engineering:</strong> Production Engineer, Process Engineer, Quality Control Engineer, Maintenance Engineer</li>
-      <li><strong>Emerging Tech Fields:</strong> AI/ML Engineer, Robotics Engineer, Data Scientist, Renewable Energy Engineer, Cybersecurity Specialist</li>
-    </ul>
-
-    <h2>Type of Industries or Sectors</h2>
-    <ul>
-      <li><strong>Infrastructure & Construction:</strong> Roads, bridges, housing, urban planning.</li>
-      <li><strong>Information Technology & Software:</strong> Software development, IT services, cloud computing, cybersecurity.</li>
-      <li><strong>Manufacturing & Industrial:</strong> Automotive, aerospace, electronics, heavy machinery.</li>
-      <li><strong>Energy & Power:</strong> Renewable energy, power plants, oil & gas, electricity distribution.</li>
-      <li><strong>Telecommunications & Electronics:</strong> Network systems, mobile tech, embedded systems.</li>
-      <li><strong>Research & Development:</strong> Government labs, private R&D centers, academic institutions.</li>
-      <li><strong>Consulting & Project Management:</strong> Technical consultancy firms and project execution companies.</li>
-    </ul>
-  </div>
-  <div id="edu" class="content-section">
-  <h2>Educational Requirements in Engineering and Technical Fields</h2>
-
-  <h3>1. Minimum Qualifications Required</h3>
-  <p>Engineering and technical careers in India have a tiered educational pathway:</p>
-  <table style="width:100%; border-collapse: collapse; color: #fff; margin-bottom: 20px;">
-    <tr style="background-color: rgba(255,255,255,0.1);">
-      <th style="border: 1px solid #fff; padding: 10px;">Level</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Typical Qualification</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Notes</th>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">10+2 / Higher Secondary</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Completion of 10+2 (Class 12) with science stream</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Required subjects: Physics, Chemistry, Mathematics. For some IT/electronics courses, Computer Science is recommended.</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Undergraduate / Graduation</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Bachelor of Engineering (B.E.) / Bachelor of Technology (B.Tech) / Bachelor of Science (B.Sc) in specific engineering disciplines</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Minimum 4 years. Core degree for most technical roles. Specialized degrees available in Computer Science, Mechanical, Civil, Electrical, Electronics, etc.</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Postgraduate / Advanced Studies</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Master of Technology (M.Tech) / Master of Science (M.Sc) / MBA in Technology Management</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Typically 2 years. Focuses on advanced knowledge, specialization, and research. Required for higher R&D roles, management positions, and teaching in technical colleges.</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Doctoral / Research</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Ph.D. in Engineering or Applied Sciences</td>
-      <td style="border: 1px solid #fff; padding: 10px;">For research-intensive careers, innovation, academia, and consultancy roles.</td>
-    </tr>
-  </table>
-
-  <h3>2. Recommended School Subjects and College Courses</h3>
-  <p>A strong foundation in science and mathematics is critical for pursuing technical careers:</p>
-  <ul>
-    <li><strong>At School (10+2 level):</strong> Compulsory: Physics, Chemistry, Mathematics. Recommended: Computer Science/IT, Biology (for Biomedical Engineering).</li>
-    <li><strong>At College / Undergraduate Level:</strong> Core courses in chosen specialization:
-      <ul>
-        <li>Mechanical Engineering: Thermodynamics, Mechanics, Fluid Mechanics, Manufacturing Technology</li>
-        <li>Civil Engineering: Structural Analysis, Construction Materials, Geotechnical Engineering, Transportation Engineering</li>
-        <li>Electrical Engineering: Circuit Theory, Control Systems, Power Electronics, Electrical Machines</li>
-        <li>Computer Science & IT: Data Structures, Algorithms, Database Systems, Networking, AI, Cybersecurity</li>
-        <li>Electronics & Communication: Digital Electronics, Microcontrollers, Signal Processing, Embedded Systems</li>
-      </ul>
-    </li>
-    <li>Additional courses for professional growth: Project Management, Industrial Safety, Advanced Computing / Software Tools</li>
-  </ul>
-
-  <h3>3. Specialized Degrees, Diplomas, or Certifications</h3>
-  <p>Beyond formal degrees, short-term certifications and diplomas enhance employability and technical expertise:</p>
-  <ul>
-    <li><strong>Diplomas:</strong> Mechanical/Civil/Electrical Engineering (2–3 years), Computer Science/IT (2–3 years)</li>
-    <li><strong>Professional Certifications:</strong>
-      <ul>
-        <li>IT & Software: AWS Certified Solutions Architect, Microsoft Azure, Cisco CCNA/CCNP, Python/Java Developer Certification</li>
-        <li>Mechanical/Industrial: CAD/CAM/CAE Certification, Six Sigma, Lean Manufacturing</li>
-        <li>Electrical/Electronics: PLC Programming, Embedded Systems, Electrical Safety & Maintenance</li>
-        <li>Emerging Fields: AI/ML, Robotics, Cybersecurity, Data Science</li>
-      </ul>
-    </li>
-  </ul>
-
-  <h3>4. Training Programs, Internships, and Apprenticeships</h3>
-  <p>Practical exposure is critical in engineering and technical fields:</p>
-  <ul>
-    <li><strong>Internships (3–12 months):</strong> Part of B.E./B.Tech curriculum. Companies: Tata Motors, Infosys, L&T, ISRO, DRDO, Tech Mahindra. Roles: project assistance, lab testing, software development, design assistance.</li>
-    <li><strong>Apprenticeships:</strong> Government-mandated under Apprenticeship Act, 1961. Hands-on industrial experience in workshops, manufacturing units, IT firms, or research labs.</li>
-    <li><strong>Training Programs:</strong> Industrial Training Institutes (ITI), Corporate Trainee Engineer Programs (GET) in large Indian companies.</li>
-  </ul>
-
-  <p><strong>Benefits of Internships and Training:</strong> Gain real-world experience, network with industry professionals, and often secure pre-placement offers (PPOs).</p>
-
-  <p><strong>Summary:</strong> Minimum requirement: 10+2 (Science) → B.E./B.Tech → M.Tech/Ph.D. (optional). Essential subjects: Physics, Chemistry, Mathematics, Computer Science. Enhancements: Diplomas, certifications, internships, apprenticeships. Purpose: Build theoretical knowledge + practical experience for career-ready skills.</p>
- </div>
- <div id="skills" class="content-section">
-  <h2>Skills and Abilities Needed in Engineering and Technical Fields</h2>
-
-  <h3>1. Technical Skills</h3>
-  <p>Technical skills are the core competencies needed to perform engineering tasks effectively. These vary depending on specialization but generally include:</p>
-  
-  <table style="width:100%; border-collapse: collapse; color: #fff; margin-bottom: 20px;">
-    <tr style="background-color: rgba(255,255,255,0.1);">
-      <th style="border: 1px solid #fff; padding: 10px;">Field / Specialization</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Key Technical Skills</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Examples in India</th>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Mechanical / Manufacturing</td>
-      <td style="border: 1px solid #fff; padding: 10px;">CAD/CAM/CAE software, Thermodynamics, Robotics, Machinery operation</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Auto industry (Tata Motors, Mahindra), Manufacturing plants</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Civil Engineering</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Structural design, Surveying, AutoCAD, Project management software, Geotechnical analysis</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Infrastructure projects, L&T, National Highways Authority</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Electrical / Electronics</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Circuit design, PLC programming, Microcontrollers, MATLAB, Embedded systems</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Power grids, ISRO, BHEL</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Computer Science / IT</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Programming (Java, Python, C++), Data Structures, Cloud Computing, AI/ML, Networking</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Infosys, TCS, Wipro, IT startups</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Industrial / Production</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Process optimization, Lean manufacturing, Quality control tools, Six Sigma</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Manufacturing & industrial plants</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Emerging Technologies</td>
-      <td style="border: 1px solid #fff; padding: 10px;">AI/ML frameworks, IoT, Robotics, Cybersecurity, Simulation software</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Startups, research labs, tech companies</td>
-    </tr>
-  </table>
-
-  <p><strong>Additional Technical Skills:</strong></p>
-  <ul>
-    <li>Knowledge of software tools: AutoCAD, SolidWorks, MATLAB, CATIA, Revit, Ansys</li>
-    <li>Understanding of standards and regulations: ISO standards, electrical safety, environmental compliance</li>
-    <li>Hands-on laboratory and field work experience</li>
-  </ul>
-
-  <h3>2. Soft Skills</h3>
-  <p>Soft skills are crucial to effectively communicate ideas, manage projects, and collaborate. Key soft skills include:</p>
-
-  <table style="width:100%; border-collapse: collapse; color: #fff; margin-bottom: 20px;">
-    <tr style="background-color: rgba(255,255,255,0.1);">
-      <th style="border: 1px solid #fff; padding: 10px;">Soft Skill</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Importance in Engineering & Technical Work</th>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Communication</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Explaining technical concepts, writing reports, giving presentations</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Teamwork / Collaboration</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Working with multidisciplinary teams for project execution</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Leadership</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Managing teams, supervising projects, motivating peers</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Problem-solving</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Identifying issues, analyzing solutions, implementing fixes</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Time Management</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Meeting deadlines, scheduling tasks efficiently</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Adaptability / Flexibility</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Learning new technologies and adapting to industry changes</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Negotiation & Client Handling</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Essential for project engineers, consultants, and managers</td>
-    </tr>
-  </table>
-
-  <h3>3. Personal Traits</h3>
-  <p>Certain personal traits distinguish successful engineers from others:</p>
-
-  <table style="width:100%; border-collapse: collapse; color: #fff; margin-bottom: 20px;">
-    <tr style="background-color: rgba(255,255,255,0.1);">
-      <th style="border: 1px solid #fff; padding: 10px;">Trait</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Why it Matters</th>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Creativity & Innovation</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Developing new solutions, designing unique systems, improving products</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Logical Thinking & Analytical Skills</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Understanding complex systems, troubleshooting, optimizing processes</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Patience & Perseverance</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Dealing with technical challenges, iterative testing, problem-solving</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Attention to Detail</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Avoiding errors in design, coding, or manufacturing</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Curiosity & Lifelong Learning</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Staying updated with technological trends and new tools</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Empathy & Client Awareness</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Designing systems considering human needs and user experience</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Resilience & Stress Management</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Handling high-pressure projects and deadlines effectively</td>
-    </tr>
-  </table>
-
-  <p><strong>Summary:</strong> To succeed in engineering and technical fields in India, a professional must combine:</p>
-  <ul>
-    <li><strong>Technical Skills:</strong> Software knowledge, machinery handling, coding, and technical expertise</li>
-    <li><strong>Soft Skills:</strong> Communication, leadership, teamwork, problem-solving, and time management</li>
-    <li><strong>Personal Traits:</strong> Creativity, logical thinking, patience, curiosity, empathy, and resilience</li>
-  </ul>
-</div>
-
-<div id="env" class="content-section">
-  <h2>Work Environment in Engineering and Technical Fields</h2>
-
-  <h3>1. Typical Workplace</h3>
-  <p>Engineering and technical professionals work in diverse environments depending on specialization, industry, and role:</p>
-  
-  <table style="width:100%; border-collapse: collapse; color: #fff; margin-bottom: 20px;">
-    <tr style="background-color: rgba(255,255,255,0.1);">
-      <th style="border: 1px solid #fff; padding: 10px;">Field / Role</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Common Workplaces</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Notes</th>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Mechanical / Manufacturing Engineers</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Factories, production units, workshops, design labs</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Involves machinery monitoring, equipment testing, production optimization</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Civil / Structural Engineers</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Construction sites, project offices, urban planning departments</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Outdoor work on sites, field inspections, safety checks</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Electrical / Electronics Engineers</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Power plants, labs, manufacturing units, IT & electronics companies</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Testing electrical systems, designing circuits, working with hardware or software</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Computer Science / IT Engineers</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Offices, IT parks, software labs, remote/home setups</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Focus on software development, coding, system maintenance</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Industrial / Production Engineers</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Factories, industrial plants, workshops</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Supervision of production lines, quality checks, process improvement</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">R&D Engineers</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Laboratories, innovation centers, research institutes</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Experimentation, prototype development, testing new technologies</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Emerging Tech (AI, Robotics, IoT)</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Labs, corporate innovation centers, IT companies</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Combines office work, lab experiments, and field testing</td>
-    </tr>
-  </table>
-
-  <h3>2. Working Hours and Conditions</h3>
-  <ul>
-    <li><strong>Standard hours:</strong> Typically 9–10 hours/day, 5–6 days/week</li>
-    <li><strong>Overtime:</strong> May be required to meet project deadlines, especially in IT, construction, or manufacturing</li>
-    <li><strong>Conditions:</strong>
-      <ul>
-        <li>Office-based engineers: Air-conditioned environments with computers, software, and collaborative tools</li>
-        <li>Field engineers: Outdoor conditions, extreme weather, construction hazards, industrial noise</li>
-        <li>Lab-based engineers: Handling chemicals, electrical circuits, or delicate prototypes; must follow safety protocols</li>
-      </ul>
-    </li>
-  </ul>
-
-  <h3>3. Team-Based or Independent Work</h3>
-  <p>Most engineering roles require a blend of team-based and independent work:</p>
-  <ul>
-    <li><strong>Team-based:</strong> Project planning, design reviews, cross-functional collaboration, software development teams</li>
-    <li><strong>Independent:</strong> Coding, individual calculations, drafting designs, conducting experiments, troubleshooting</li>
-    <li><strong>Leadership roles:</strong> Coordinating teams of engineers and technicians</li>
-  </ul>
-
-  <h3>4. Level of Stress or Pressure</h3>
-  <table style="width:100%; border-collapse: collapse; color: #fff; margin-bottom: 20px;">
-    <tr style="background-color: rgba(255,255,255,0.1);">
-      <th style="border: 1px solid #fff; padding: 10px;">Factor</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Typical Stress Level</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Notes</th>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Project Deadlines</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Moderate to High</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Meeting client or organizational timelines can be stressful</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Safety & Compliance</td>
-      <td style="border: 1px solid #fff; padding: 10px;">High</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Civil, electrical, or mechanical engineers have responsibility for safe designs</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Problem-solving Complexity</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Moderate to High</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Critical thinking required for technical challenges</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Work Environment</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Variable</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Field work may be physically demanding; IT work may require long hours sitting at a desk</td>
-    </tr>
-  </table>
-
-  <p><strong>Summary:</strong></p>
-  <ul>
-    <li>Workplaces: Offices, labs, factories, construction sites, or outdoors depending on specialization</li>
-    <li>Working hours: Standard 9–10 hours; overtime during projects</li>
-    <li>Work type: Combination of team-based collaboration and independent tasks</li>
-    <li>Stress level: Moderate to high, influenced by project deadlines, safety responsibilities, and technical complexity</li>
-  </ul>
-</div>
-
-<div id="growth" class="content-section">
-  <h2>Career Path and Growth Opportunities in Engineering and Technical Fields</h2>
-
-  <h3>1. Entry-Level Positions</h3>
-  <p>Most engineers start with junior or assistant roles after completing their undergraduate degree (B.E./B.Tech). Typical examples include:</p>
-  
-  <table style="width:100%; border-collapse: collapse; color: #fff; margin-bottom: 20px;">
-    <tr style="background-color: rgba(255,255,255,0.1);">
-      <th style="border: 1px solid #fff; padding: 10px;">Branch / Field</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Entry-Level Positions</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Typical Responsibilities</th>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Mechanical / Manufacturing</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Junior Mechanical Engineer, Design Engineer, Production Engineer, Maintenance Engineer</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Assist in design, production, or maintenance of machinery; work under senior engineers</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Civil Engineering</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Site Engineer, Junior Structural Engineer, Project Assistant</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Support construction projects, site supervision, planning, and reporting</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Electrical / Electronics</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Electrical Engineer, Electronics Technician, Test Engineer</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Assist in circuit design, testing, installation, and troubleshooting</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Computer Science / IT</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Software Developer, IT Support Engineer, System Analyst, Junior Programmer</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Write code, test software, maintain systems, troubleshoot issues</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Industrial / Production</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Process Engineer, Quality Control Engineer, Operations Trainee</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Monitor production processes, optimize efficiency, ensure quality standards</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">R&D / Emerging Tech</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Research Assistant, Junior Data Analyst, Junior AI/ML Engineer</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Assist in experiments, prototype development, data analysis</td>
-    </tr>
-  </table>
-
-  <p><strong>Typical Starting Salary in India:</strong> ₹3–6 LPA (varies by sector, company, and specialization)</p>
-
-  <h3>2. Possibilities of Advancement or Specialization</h3>
-  <ul>
-    <li><strong>Mid-Level Roles:</strong> Senior Engineer, Project Engineer, Software Team Lead, Technical Specialist (3–7 years experience)</li>
-    <li><strong>Senior-Level Roles:</strong> Engineering Manager, Chief Engineer, Project Manager, Senior Software Architect, Principal Scientist (7–15 years)</li>
-    <li><strong>Leadership Roles:</strong> CTO, Technical Director, Department Head (15+ years)</li>
-  </ul>
-
-  <h4>Specialization Opportunities:</h4>
-  <ul>
-    <li>Civil → Structural, Geotechnical, Environmental Engineering</li>
-    <li>Mechanical → Robotics, Automotive, Aerospace, Mechatronics</li>
-    <li>IT → AI/ML, Cybersecurity, Cloud Computing, Data Science</li>
-    <li>Electrical → Power Systems, Electronics Design, Embedded Systems</li>
-  </ul>
-
-  <p><strong>Higher Education & Certification Boosts Growth:</strong> M.Tech / MS / MBA (Technology Management), Professional certifications (AWS, Cisco, Six Sigma, AI/ML), Research experience for academia or R&D positions</p>
-
-  <h3>3. Related or Alternative Career Options</h3>
-  <table style="width:100%; border-collapse: collapse; color: #fff; margin-bottom: 20px;">
-    <tr style="background-color: rgba(255,255,255,0.1);">
-      <th style="border: 1px solid #fff; padding: 10px;">Original Field</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Related / Alternative Career Options</th>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Mechanical / Manufacturing</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Aerospace Engineer, Automotive Designer, Industrial Designer</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Civil Engineering</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Urban Planner, Construction Manager, Environmental Consultant</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Electrical / Electronics</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Instrumentation Engineer, Robotics Engineer, Embedded Systems Developer</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Computer Science / IT</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Data Scientist, Cybersecurity Analyst, Software Consultant</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Industrial / Production</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Supply Chain Analyst, Operations Manager, Lean Six Sigma Consultant</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Emerging Tech / R&D</td>
-      <td style="border: 1px solid #fff; padding: 10px;">AI Researcher, IoT Solutions Architect, Technology Consultant</td>
-    </tr>
-  </table>
-
-  <h3>4. Scope for Entrepreneurship or Self-Employment</h3>
-  <ul>
-    <li><strong>Tech Startups:</strong> Software, IT services, AI/ML applications, robotics, IoT solutions</li>
-    <li><strong>Manufacturing & Design:</strong> Mechanical tools, consumer products, electronics, green technology</li>
-    <li><strong>Consultancy & Services:</strong> Engineering consulting, quality audits, project management, safety compliance</li>
-    <li><strong>Freelancing / Contract Work:</strong> Software development, CAD designing, testing services, embedded systems</li>
-  </ul>
-
-  <p><strong>Success Factors for Entrepreneurship:</strong> Innovation, industry knowledge, networking, management skills</p>
-
-  <h3> Summary</h3>
-  <ul>
-    <li>Entry-level positions: Junior Engineer, Software Developer, Site Engineer, Trainee roles</li>
-    <li>Advancement: Mid-level → Senior → Leadership; specialization in subfields</li>
-    <li>Related careers: Interdisciplinary roles or consultancy</li>
-    <li>Entrepreneurship: Startups, manufacturing, IT solutions, consulting, freelancing</li>
-  </ul>
-</div>
-
-<div id="salary" class="content-section">
-  <h2>Salary and Benefits in Engineering and Technical Fields</h2>
-
-  <h3>1. Average Starting Salary</h3>
-  <table style="width:100%; border-collapse: collapse; color: #fff; margin-bottom: 20px;">
-    <tr style="background-color: rgba(255,255,255,0.1);">
-      <th style="border: 1px solid #fff; padding: 10px;">Field / Branch</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Typical Starting Salary (India)</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Notes</th>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Mechanical / Manufacturing</td>
-      <td style="border: 1px solid #fff; padding: 10px;">₹3–5 LPA</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Depends on company (Tata Motors, Mahindra, L&T) and location</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Civil Engineering</td>
-      <td style="border: 1px solid #fff; padding: 10px;">₹3–4.5 LPA</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Private construction companies, infrastructure projects</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Electrical / Electronics</td>
-      <td style="border: 1px solid #fff; padding: 10px;">₹3–5 LPA</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Power, electronics, and IT hardware companies</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Computer Science / IT</td>
-      <td style="border: 1px solid #fff; padding: 10px;">₹4–8 LPA</td>
-      <td style="border: 1px solid #fff; padding: 10px;">IT firms like Infosys, TCS, Wipro; startups may vary</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Industrial / Production</td>
-      <td style="border: 1px solid #fff; padding: 10px;">₹3–5 LPA</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Manufacturing plants, process industries</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Emerging Tech / R&D</td>
-      <td style="border: 1px solid #fff; padding: 10px;">₹4–7 LPA</td>
-      <td style="border: 1px solid #fff; padding: 10px;">AI, Data Science, Robotics, IoT; private labs & research institutes</td>
-    </tr>
-  </table>
-
-  <h3>2. Mid-Level and Senior-Level Earnings</h3>
-  <table style="width:100%; border-collapse: collapse; color: #fff; margin-bottom: 20px;">
-    <tr style="background-color: rgba(255,255,255,0.1);">
-      <th style="border: 1px solid #fff; padding: 10px;">Experience Level</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Typical Salary Range (India)</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Example Roles</th>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Mid-Level (3–7 years)</td>
-      <td style="border: 1px solid #fff; padding: 10px;">₹6–12 LPA</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Senior Engineer, Project Engineer, Technical Specialist</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Senior-Level (7–15 years)</td>
-      <td style="border: 1px solid #fff; padding: 10px;">₹12–25 LPA</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Engineering Manager, Senior Software Architect, Principal Engineer</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Leadership / Executive (&gt;15 years)</td>
-      <td style="border: 1px solid #fff; padding: 10px;">₹25–50+ LPA</td>
-      <td style="border: 1px solid #fff; padding: 10px;">CTO, Technical Director, Head of Engineering</td>
-    </tr>
-  </table>
-
-  <h3>3. Additional Benefits</h3>
-  <table style="width:100%; border-collapse: collapse; color: #fff; margin-bottom: 20px;">
-    <tr style="background-color: rgba(255,255,255,0.1);">
-      <th style="border: 1px solid #fff; padding: 10px;">Benefit</th>
-      <th style="border: 1px solid #fff; padding: 10px;">Description</th>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Performance Bonuses</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Annual or project-based bonuses for achieving targets</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Health Insurance</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Medical coverage for employees and dependents</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Provident Fund (PF)</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Retirement savings mandatory under Indian law</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Paid Leave / Vacation</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Annual leave, sick leave, maternity/paternity leave</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Travel Allowances</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Reimbursement for fieldwork or client visits; some companies provide company cars</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Professional Development</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Sponsorship for certifications, workshops, or higher studies</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Flexible Working</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Remote work, flexible hours (especially in IT/Software)</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #fff; padding: 10px;">Stock Options / Equity</td>
-      <td style="border: 1px solid #fff; padding: 10px;">Especially in startups and tech companies</td>
-    </tr>
-  </table>
-
-  <h3> Summary</h3>
-  <ul>
-    <li>Starting Salary: ₹3–8 LPA depending on specialization and company</li>
-    <li>Mid-Level: ₹6–12 LPA; Senior-Level: ₹12–25 LPA; Leadership roles: ₹25–50+ LPA</li>
-    <li>Benefits: Bonuses, health insurance, PF, paid leave, travel allowance, professional training, stock options</li>
-  </ul>
-</div>
-
-<div id="demand" class="content-section">
-  <h2>Employment Outlook and Demand in Engineering and Technical Fields</h2>
-
-  <h3>1. Current and Future Demand</h3>
-  <ul>
-    <li><strong>Strong Demand Across Sectors:</strong> India’s engineering job market is experiencing sustained growth, driven by AI, digital transformation, and infrastructure development.</li>
-    <li><strong>High-Growth Areas:</strong>
-      <ul>
-        <li><strong>AI & Machine Learning:</strong> AI/ML engineers and developers witnessing significant hiring growth.</li>
-        <li><strong>Data Engineering:</strong> Sector projected to exceed USD 42 billion with demand in banking, e-commerce, and healthcare.</li>
-        <li><strong>Renewable Energy & Electric Vehicles (EVs):</strong> Expected to create 10 million direct and 50 million indirect jobs by 2030.</li>
-      </ul>
-    </li>
-  </ul>
-
-  <h3>2. Growth Rate and Emerging Trends</h3>
-  <ul>
-    <li><strong>Overall Sector Growth:</strong> Engineering job market projected to grow faster than the average of all occupations over the next decade.</li>
-    <li><strong>Technological Advancements:</strong>
-      <ul>
-        <li>AI Integration: Creates new roles and transforms existing ones, requiring continuous learning.</li>
-        <li>Automation: AI-driven automation reshapes job roles; upskilling is essential.</li>
-      </ul>
-    </li>
-    <li><strong>Regional Shifts:</strong>
-      <ul>
-        <li>Tier-2 and Tier-3 Cities (Kochi, Coimbatore) emerging as attractive alternatives with competitive salaries.</li>
-        <li>Infrastructure Development: Government initiatives boost local employment opportunities.</li>
-      </ul>
-    </li>
-  </ul>
-
-  <h3>3. Technological and Social Changes Affecting the Career</h3>
-  <ul>
-    <li><strong>Technological Disruption:</strong>
-      <ul>
-        <li>AI and Automation: Transform engineering roles, requiring new skills.</li>
-        <li>Digital Transformation: Increased demand for engineers skilled in cloud computing, cybersecurity, and data analytics.</li>
-      </ul>
-    </li>
-    <li><strong>Social Dynamics:</strong>
-      <ul>
-        <li>Gender Diversity: Emphasis on enhancing women's workforce participation in engineering.</li>
-        <li>Skill Development: Upskilling/reskilling programs to address workforce skill gaps.</li>
-      </ul>
-    </li>
-  </ul>
-
-  <h3>4. Global vs. National Opportunities</h3>
-  <ul>
-    <li><strong>Global Opportunities:</strong>
-      <ul>
-        <li>International Demand: Countries like the U.S., Germany, and Japan have shortages of skilled engineers.</li>
-        <li>Remote Work: Expands access to international projects and global collaboration.</li>
-      </ul>
-    </li>
-    <li><strong>National Opportunities:</strong>
-      <ul>
-        <li>Government Initiatives: "Make in India" and "Digital India" foster innovation and new engineering roles.</li>
-        <li>Infrastructure Projects: Smart cities, renewable energy initiatives generate high demand for engineers.</li>
-      </ul>
-    </li>
-  </ul>
-
-  <h3> Summary</h3>
-  <ul>
-    <li>High Demand: Engineering professionals are sought across sectors, with AI, data engineering, and renewable energy offering substantial opportunities.</li>
-    <li>Growth Rate: Job market expected to grow faster than average occupations, driven by technology and industry needs.</li>
-    <li>Technological Changes: Professionals must adapt via upskilling in AI, automation, and digital tools.</li>
-    <li>Global and National Opportunities: Diverse opportunities exist both internationally and domestically, supported by government initiatives.</li>
-  </ul>
-</div>
-
-<div id="proscons" class="content-section">
-  <h2>Advantages and Challenges of a Career in Engineering and Technical Fields</h2>
-
-  <h3>1. Advantages of Choosing This Career</h3>
-  <ul>
-    <li><strong>High Demand & Job Security:</strong> Engineers are consistently needed across industries—IT, manufacturing, civil, electronics—making the field relatively stable.</li>
-    <li><strong>Attractive Salary Packages:</strong> Starting salaries are competitive (₹3–8 LPA), with mid- and senior-level positions offering substantial financial growth.</li>
-    <li><strong>Diverse Career Opportunities:</strong> Wide range of specializations (mechanical, civil, electrical, IT, AI, robotics) and roles in research, design, and management.</li>
-    <li><strong>Innovation & Creativity:</strong> Opportunities to design, build, and improve technologies and systems that impact society.</li>
-    <li><strong>Global Opportunities:</strong> Indian engineers are highly employable internationally, especially in IT, AI, and software development.</li>
-    <li><strong>Entrepreneurial Scope:</strong> Possibility to start tech startups, consultancy firms, manufacturing units, or freelance work.</li>
-    <li><strong>Continuous Learning:</strong> Rapid technological advancement ensures lifelong learning and skill development.</li>
-  </ul>
-
-  <h3>2. Common Challenges and Drawbacks</h3>
-  <ul>
-    <li><strong>High Competition:</strong> Engineering is a popular career in India, making entry-level and specialized roles highly competitive.</li>
-    <li><strong>Stressful Deadlines:</strong> Projects often have tight deadlines, high stakes, and client expectations, causing pressure.</li>
-    <li><strong>Long Working Hours:</strong> Especially in IT, construction, and research, engineers may face overtime or night shifts.</li>
-    <li><strong>Technological Obsolescence:</strong> Rapid technological changes require continual upskilling to stay relevant.</li>
-    <li><strong>Field Hazards:</strong> Civil, mechanical, or electrical engineers working on sites or plants may face physical risks.</li>
-    <li><strong>Workload Variation:</strong> Work may fluctuate based on project phases—periods of intense activity followed by low workload.</li>
-  </ul>
-
-  <h3>3. Work-Life Balance Considerations</h3>
-  <ul>
-    <li><strong>Industry Impact:</strong> IT and software engineers often have flexible or remote work options, while civil, mechanical, and manufacturing engineers may need to be onsite.</li>
-    <li><strong>Project Deadlines:</strong> Deadlines can affect personal time; project-based work may involve extended hours temporarily.</li>
-    <li><strong>Remote & Hybrid Opportunities:</strong> Increasing adoption of remote work in IT and tech sectors improves work-life balance.</li>
-    <li><strong>Job Flexibility:</strong> Freelancing, consultancy, and startups provide more control over schedule, but may increase responsibility and stress.</li>
-    <li><strong>Health & Lifestyle:</strong> Desk-based roles may involve sedentary lifestyle risks; field jobs may be physically demanding.</li>
-  </ul>
-
-  <p><strong>Tip for Balance:</strong> Time management, prioritization, and choosing the right sector (IT, R&D, consultancy) can significantly improve work-life balance.</p>
-
-  <h3> Summary</h3>
-  <ul>
-    <li><strong>Advantages:</strong> High demand, good salaries, global opportunities, innovation, and entrepreneurial scope.</li>
-    <li><strong>Challenges:</strong> Competition, stressful deadlines, long hours, field hazards, and rapid technological change.</li>
-    <li><strong>Work-Life Balance:</strong> Varies by sector; IT and consultancy offer flexibility, while field and project-based roles may be demanding.</li>
-  </ul>
-</div>
-
-<div id="rolemodel" class="content-section">
-  <h2>Famous Personalities / Role Models in Engineering and Technical Fields</h2>
-
-  <p>Engineering and technical professions are defined not just by problem-solving but by visionaries who have shaped industries, technology, and society. Studying their journeys provides practical insights and inspiration for aspiring engineers.</p>
-
-  <h3>1. Notable Indian Personalities</h3>
-  <table border="1" cellpadding="10" cellspacing="0">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Field / Specialization</th>
-        <th>Contributions / Achievements</th>
-        <th>Lessons from Their Journey</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>M. Visvesvaraya (1861–1962)</td>
-        <td>Civil Engineering</td>
-        <td>Pioneered flood control systems in Mysore, designed irrigation projects, implemented automatic sluice gates; Bharat Ratna awardee.</td>
-        <td>Attention to detail, combining engineering knowledge with societal needs; engineers can directly improve lives.</td>
-      </tr>
-      <tr>
-        <td>A. P. J. Abdul Kalam (1931–2015)</td>
-        <td>Aerospace / Defence Engineering</td>
-        <td>Key architect of India’s missile programs (SLV-III, Agni, Prithvi); advocated education and innovation; served as President of India.</td>
-        <td>Applied science, patience in research, connecting technical work to national development.</td>
-      </tr>
-      <tr>
-        <td>E. Sreedharan (1932–2020)</td>
-        <td>Civil / Metro Rail Engineering</td>
-        <td>“Metro Man”; transformed urban transport (Delhi Metro, Konkan Railway); emphasized punctuality and efficient project management.</td>
-        <td>Leadership, discipline, and planning are critical to executing large-scale engineering projects successfully.</td>
-      </tr>
-      <tr>
-        <td>N. R. Narayana Murthy (b. 1946)</td>
-        <td>Software / IT Engineering</td>
-        <td>Co-founder of Infosys; helped establish India as a global IT hub; promoted corporate governance and technological education.</td>
-        <td>Integrity, vision, and entrepreneurship can transform a national industry and create global impact.</td>
-      </tr>
-      <tr>
-        <td>Sundar Pichai (b. 1972)</td>
-        <td>Software / Technology</td>
-        <td>CEO of Alphabet Inc. and Google; led development of Chrome, Google Drive, and Android.</td>
-        <td>Global opportunities for Indian engineers; importance of adaptability and combining technical skills with leadership.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>2. Notable Global Personalities</h3>
-  <table border="1" cellpadding="10" cellspacing="0">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Field / Specialization</th>
-        <th>Contributions / Achievements</th>
-        <th>Lessons from Their Journey</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Elon Musk (b. 1971)</td>
-        <td>Mechanical / Electrical / Space Technology</td>
-        <td>Founder of Tesla and SpaceX; advanced EVs, batteries, reusable rockets, AI integration.</td>
-        <td>Interdisciplinary knowledge, calculated risk-taking, and vision can redefine industries.</td>
-      </tr>
-      <tr>
-        <td>Nikola Tesla (1856–1943)</td>
-        <td>Electrical Engineering</td>
-        <td>Developed AC electricity systems, induction motors, early wireless communication systems.</td>
-        <td>Creativity, relentless experimentation, and forward-thinking define long-term impact.</td>
-      </tr>
-      <tr>
-        <td>Tim Berners-Lee (b. 1955)</td>
-        <td>Computer Science</td>
-        <td>Invented the World Wide Web; advocates open-source standards and global internet accessibility.</td>
-        <td>Innovation addressing real-world problems and focusing on societal benefit amplifies engineering impact.</td>
-      </tr>
-      <tr>
-        <td>Ada Lovelace (1815–1852)</td>
-        <td>Computing / Mathematics</td>
-        <td>First computer programmer; work on Babbage’s Analytical Engine laid foundation for modern computing.</td>
-        <td>Analytical thinking, vision, and early adoption of emerging technologies are essential.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>3. Insights and Lessons from Their Journeys</h3>
-  <ul>
-    <li><strong>Engineering for Society:</strong> Apply technical skills to solve real societal problems.</li>
-    <li><strong>Lifelong Learning and Adaptability:</strong> Continuous learning and adaptation are vital.</li>
-    <li><strong>Innovation with Responsibility:</strong> Balance creativity with safety, ethics, and societal impact.</li>
-    <li><strong>Leadership and Vision:</strong> Engineers can evolve into leaders managing complex systems and teams.</li>
-    <li><strong>Persistence and Problem-Solving:</strong> Failures are part of the journey; perseverance leads to breakthroughs.</li>
-  </ul>
-
-  <h3> Summary</h3>
-  <ul>
-    <li>Famous engineers exemplify technical excellence, societal impact, and visionary leadership.</li>
-    <li>Indian role models like Visvesvaraya, Abdul Kalam, Sreedharan, and Murthy emphasize nation-building and innovation.</li>
-    <li>Global personalities like Elon Musk, Nikola Tesla, Tim Berners-Lee, and Ada Lovelace illustrate creativity, adaptability, and interdisciplinary skills.</li>
-    <li>Lesson: Success in engineering combines knowledge, problem-solving, innovation, leadership, and ethical responsibility.</li>
-  </ul>
-</div>
-
-<div id="institutions" class="content-section">
-  <h2>Institutions and Training Centers for Engineering and Technical Careers</h2>
-
-  <p>A strong educational foundation and specialized training are critical for succeeding in engineering and technical fields. India offers world-class universities, specialized institutes, and online platforms for gaining knowledge, certifications, and hands-on experience.</p>
-
-  <h3>1. Reputed Colleges, Universities, and Institutes in India</h3>
-  <table border="1" cellpadding="10" cellspacing="0">
-    <thead>
-      <tr>
-        <th>Institution</th>
-        <th>Location</th>
-        <th>Courses / Specializations</th>
-        <th>Highlights</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Indian Institutes of Technology (IITs)</td>
-        <td>Across India (Delhi, Bombay, Madras, Kanpur, etc.)</td>
-        <td>B.Tech, M.Tech, PhD – Mechanical, Civil, Electrical, Computer Science, Aerospace, AI, Robotics</td>
-        <td>Globally recognized; high-quality research; strong industry connections; rigorous curriculum; placement opportunities with multinational companies.</td>
-      </tr>
-      <tr>
-        <td>National Institutes of Technology (NITs)</td>
-        <td>Across India (Trichy, Surathkal, Warangal, etc.)</td>
-        <td>B.Tech, M.Tech in core engineering fields</td>
-        <td>Excellent technical training; strong campus placements; good research opportunities.</td>
-      </tr>
-      <tr>
-        <td>Birla Institute of Technology & Science (BITS Pilani)</td>
-        <td>Pilani, Goa, Hyderabad</td>
-        <td>B.E., M.E., Integrated M.Sc., M.Tech; Computer Science, Electronics, Mechanical, AI</td>
-        <td>Flexible curriculum; emphasis on innovation and entrepreneurship; strong alumni network.</td>
-      </tr>
-      <tr>
-        <td>Indian Institute of Science (IISc)</td>
-        <td>Bangalore</td>
-        <td>M.Tech, PhD; research programs in Mechanical, Civil, Electrical, AI, Robotics</td>
-        <td>Focused on research and innovation; state-of-the-art labs; partnerships with industries.</td>
-      </tr>
-      <tr>
-        <td>Delhi Technological University (DTU)</td>
-        <td>Delhi</td>
-        <td>B.Tech, M.Tech; Computer Science, Electrical, Civil, Mechanical, Emerging Tech</td>
-        <td>Industry-linked programs; strong internship and placement opportunities.</td>
-      </tr>
-      <tr>
-        <td>Vellore Institute of Technology (VIT)</td>
-        <td>Vellore, Tamil Nadu</td>
-        <td>B.Tech, M.Tech; CSE, AI/ML, Mechanical, Electrical</td>
-        <td>Modern campus, international collaborations, high placement rates.</td>
-      </tr>
-      <tr>
-        <td>Indian Institutes of Information Technology (IIITs)</td>
-        <td>Across India</td>
-        <td>Computer Science, AI, Data Science, Software Engineering</td>
-        <td>Specialization in IT and software; strong industry partnerships; global certifications.</td>
-      </tr>
-      <tr>
-        <td>Top Private Engineering Colleges</td>
-        <td>e.g., Manipal Institute of Technology, SRM, Amity</td>
-        <td>Core engineering and IT courses</td>
-        <td>Offers scholarships, strong industry exposure, international collaborations.</td>
-      </tr>
-    </tbody>
-  </table>
-  <p><em>Note:</em> Admission typically requires JEE Main / Advanced (IITs/NITs), BITSAT (BITS), or institute-specific entrance exams.</p>
-
-  <h3>2. Online Platforms and Vocational Training Centers</h3>
-  <table border="1" cellpadding="10" cellspacing="0">
-    <thead>
-      <tr>
-        <th>Platform / Institute</th>
-        <th>Type</th>
-        <th>Courses / Certifications</th>
-        <th>Highlights</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Coursera / edX / Udemy</td>
-        <td>Online Global Platforms</td>
-        <td>AI/ML, Data Science, Electrical, Mechanical, Civil, Software Development</td>
-        <td>Access to international certifications; learn from top universities; flexible learning schedules.</td>
-      </tr>
-      <tr>
-        <td>NPTEL (National Programme on Technology Enhanced Learning)</td>
-        <td>Indian Government Initiative</td>
-        <td>Engineering courses from IITs, IISc in all disciplines</td>
-        <td>Free or low-cost; certificates recognized by Indian employers.</td>
-      </tr>
-      <tr>
-        <td>Skill India / NSDC Training Centers</td>
-        <td>Government Vocational Training</td>
-        <td>Mechatronics, Robotics, Industrial Automation, Electrical, Civil Drafting</td>
-        <td>Focus on employable skills; practical hands-on training.</td>
-      </tr>
-      <tr>
-        <td>MIT OpenCourseWare / Stanford Online</td>
-        <td>International Online</td>
-        <td>Computer Science, Mechanical, AI, Electrical, Civil</td>
-        <td>Access to free engineering courses from world-renowned universities.</td>
-      </tr>
-      <tr>
-        <td>Internshala Training / Coursera India</td>
-        <td>Online Internship & Skill-Based Training</td>
-        <td>Web Development, Embedded Systems, Robotics, Data Science</td>
-        <td>Combines learning with real project experience; provides certifications.</td>
-      </tr>
-      <tr>
-        <td>Tata Technologies / Siemens Vocational Programs</td>
-        <td>Industry-Led Training</td>
-        <td>CAD/CAM, Robotics, Automation, Mechatronics</td>
-        <td>Industry-specific skill training; exposure to real-life engineering projects.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>3. Scholarships and Financial Aid</h3>
-  <table border="1" cellpadding="10" cellspacing="0">
-    <thead>
-      <tr>
-        <th>Scholarship / Scheme</th>
-        <th>Eligibility</th>
-        <th>Benefits</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>National Talent Search Exam (NTSE)</td>
-        <td>High school students; national-level merit</td>
-        <td>Financial aid for undergraduate engineering studies.</td>
-      </tr>
-      <tr>
-        <td>AICTE Pragati Scholarship</td>
-        <td>Girl students in technical courses</td>
-        <td>₹30,000 per year for tuition and expenses.</td>
-      </tr>
-      <tr>
-        <td>INSPIRE Scholarship</td>
-        <td>Students in Science and Technology fields</td>
-        <td>₹80,000 per year for B.Tech and M.Tech students.</td>
-      </tr>
-      <tr>
-        <td>IIT / NIT Merit-Cum-Means Scholarships</td>
-        <td>Students with high JEE scores and financial need</td>
-        <td>Tuition fee waiver and financial assistance.</td>
-      </tr>
-      <tr>
-        <td>Private & Industry Scholarships</td>
-        <td>BITS, VIT, Manipal, Siemens, Tata Foundation</td>
-        <td>Tuition fee waiver, stipend, mentorship, internships.</td>
-      </tr>
-      <tr>
-        <td>Educational Loans</td>
-        <td>Offered by SBI, HDFC, ICICI</td>
-        <td>Loans up to ₹20–50 Lakh for B.Tech, M.Tech, and specialized programs.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3> Summary</h3>
-  <ul>
-    <li><strong>Top Institutions:</strong> IITs, NITs, BITS, IISc, IIITs, DTU, VIT – world-class education and research opportunities.</li>
-    <li><strong>Online & Vocational Training:</strong> Coursera, NPTEL, Skill India, Siemens, Internshala enhance employable skills and practical knowledge.</li>
-    <li><strong>Financial Support:</strong> Scholarships (AICTE Pragati, INSPIRE), merit-based aid, and educational loans make education accessible.</li>
-    <li><strong>Practical Advice:</strong> Combining formal education with certifications and internships ensures strong technical competence and real-world readiness.</li>
-  </ul>
-</div>
-
-<div id="associations" class="content-section">
-  <h2>Professional Associations and Networks in Engineering and Technical Fields</h2>
-
-  <p>Joining professional associations and networks is critical for career growth, industry exposure, and staying updated with the latest trends and standards in engineering and technology. These platforms offer knowledge sharing, networking, certifications, and career opportunities.</p>
-
-  <h3>1. National Professional Associations</h3>
-  <table border="1" cellpadding="10" cellspacing="0">
-    <thead>
-      <tr>
-        <th>Organization</th>
-        <th>Focus / Specialization</th>
-        <th>Key Activities & Benefits</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Institution of Engineers (India) – IEI</td>
-        <td>Multidisciplinary (Mechanical, Civil, Electrical, IT, etc.)</td>
-        <td>Professional recognition, access to journals, technical seminars, conferences, networking, title “MIE” (Member of Institution of Engineers).</td>
-      </tr>
-      <tr>
-        <td>Indian Society for Technical Education (ISTE)</td>
-        <td>Engineering & Technical Education</td>
-        <td>Faculty development programs, workshops, student chapters, networking and skill enhancement.</td>
-      </tr>
-      <tr>
-        <td>Indian National Academy of Engineering (INAE)</td>
-        <td>Advanced Engineering Research & Policy</td>
-        <td>Research dissemination, policy advice, awards for excellence; membership is prestigious and selective.</td>
-      </tr>
-      <tr>
-        <td>Computer Society of India (CSI)</td>
-        <td>IT, Software, Computer Science</td>
-        <td>Workshops, hackathons, certifications, networking events; access to research journals.</td>
-      </tr>
-      <tr>
-        <td>IEEE India Chapter</td>
-        <td>Electrical, Electronics, IT</td>
-        <td>Seminars, conferences, competitions; access to technical papers and leadership roles in local chapters.</td>
-      </tr>
-      <tr>
-        <td>Indian Society of Mechanical Engineers (ISME)</td>
-        <td>Mechanical, Manufacturing</td>
-        <td>Workshops, skill programs, competitions, and publication of research journals.</td>
-      </tr>
-      <tr>
-        <td>Society of Automotive Engineers India (SAE India)</td>
-        <td>Automotive & Mechanical Engineering</td>
-        <td>International conferences, competitions, networking with automotive firms, mobility and vehicle engineering focus.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>2. International Professional Associations</h3>
-  <table border="1" cellpadding="10" cellspacing="0">
-    <thead>
-      <tr>
-        <th>Organization</th>
-        <th>Focus / Specialization</th>
-        <th>Key Benefits for Indian Engineers</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>IEEE</td>
-        <td>Electrical, Electronics, Computer Science</td>
-        <td>International networking, research publications, certifications, technical standards, global conferences.</td>
-      </tr>
-      <tr>
-        <td>ASME</td>
-        <td>Mechanical Engineering</td>
-        <td>Standards development, global networking, conferences, research resources.</td>
-      </tr>
-      <tr>
-        <td>ACM</td>
-        <td>Computer Science & IT</td>
-        <td>Publications, workshops, online courses, global collaborations, research journals.</td>
-      </tr>
-      <tr>
-        <td>ASCE</td>
-        <td>Civil & Structural Engineering</td>
-        <td>Networking, professional development, standards, technical committees.</td>
-      </tr>
-      <tr>
-        <td>IET (UK)</td>
-        <td>Multidisciplinary</td>
-        <td>International membership, webinars, professional certification, global networking.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>3. Licensing or Registration Requirements</h3>
-  <ul>
-    <li><strong>IEI Registration (India):</strong> Chartered Engineer (C.Eng) status for professional recognition.</li>
-    <li><strong>Council of Engineers / State Licensing (India):</strong> Required in some states for civil/structural engineering practice.</li>
-    <li><strong>International Licensing:</strong> PE (USA), P.Eng (Canada) or credential evaluation needed for working abroad.</li>
-    <li><strong>Certifications:</strong> IEEE, ASME, CSI offer globally recognized certifications and digital badges.</li>
-  </ul>
-
-  <h3>4. Conferences, Workshops, and Seminars</h3>
-  <table border="1" cellpadding="10" cellspacing="0">
-    <thead>
-      <tr>
-        <th>Event / Platform</th>
-        <th>Focus</th>
-        <th>Benefits</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>IEEE International Conferences</td>
-        <td>Electrical, Electronics, IT</td>
-        <td>Latest research, networking with global experts, paper presentations.</td>
-      </tr>
-      <tr>
-        <td>SAE International Mobility Conference & Exhibition</td>
-        <td>Automotive & Mechanical</td>
-        <td>Vehicle engineering innovations, networking with automotive companies.</td>
-      </tr>
-      <tr>
-        <td>ISTE National Student & Faculty Conventions</td>
-        <td>Technical Education</td>
-        <td>Skill development, innovation competitions, collaboration opportunities.</td>
-      </tr>
-      <tr>
-        <td>INAE Annual Meetings</td>
-        <td>Advanced Engineering Research</td>
-        <td>Policy discussions, research collaborations, awards for excellence.</td>
-      </tr>
-      <tr>
-        <td>Skill Development Workshops by NASSCOM / FICCI</td>
-        <td>IT & Emerging Tech</td>
-        <td>Hands-on workshops in AI, IoT, Robotics, Cloud Computing.</td>
-      </tr>
-      <tr>
-        <td>Hackathons & Technical Fests (College & National Level)</td>
-        <td>All Engineering Fields</td>
-        <td>Practical application of skills, problem-solving, exposure to industry trends, networking.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3> Tips for Engineers</h3>
-  <ul>
-    <li>Join relevant associations early (even as a student) to gain mentorship and guidance.</li>
-    <li>Attend national and international conferences to stay updated on trends like AI, Renewable Energy, Robotics, and Automation.</li>
-    <li>Pursue certifications or workshops offered by these associations to enhance credibility and employability.</li>
-  </ul>
-
-  <h3> Summary</h3>
-  <ul>
-    <li><strong>National Associations:</strong> IEI, ISTE, CSI, SAE India – support professional development, networking, and research exposure.</li>
-    <li><strong>International Associations:</strong> IEEE, ASME, ACM, ASCE, IET – provide global recognition, publications, and collaboration opportunities.</li>
-    <li><strong>Licensing / Registration:</strong> Chartered Engineer (IEI), state-level licenses, PE/P.Eng for international practice.</li>
-    <li><strong>Conferences & Workshops:</strong> Critical for skill enhancement, exposure to new technologies, networking, and career advancement.</li>
-  </ul>
-</div>
-<div id="impact" class="content-section">
-  <h2>Social Impact and Ethical Considerations in Engineering and Technical Careers</h2>
-
-  <p>Engineering and technical professions are not just about designing systems or coding software; they profoundly influence society, economy, environment, and human lives. Ethical behavior and social responsibility are integral to sustaining public trust and ensuring beneficial outcomes.</p>
-
-  <h3>1. Social Impact of Engineering and Technical Careers</h3>
-  <table border="1" cellpadding="10" cellspacing="0">
-    <thead>
-      <tr>
-        <th>Area of Impact</th>
-        <th>Examples</th>
-        <th>Benefits to Society</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Infrastructure Development</td>
-        <td>Roads, bridges, metro systems, water supply, sanitation, urban planning</td>
-        <td>Enhances quality of life, supports economic growth, improves accessibility and mobility</td>
-      </tr>
-      <tr>
-        <td>Healthcare & Biotechnology</td>
-        <td>Medical devices, prosthetics, biomedical engineering, diagnostics technology</td>
-        <td>Saves lives, improves healthcare access, reduces disease burden</td>
-      </tr>
-      <tr>
-        <td>Information Technology & Digital Solutions</td>
-        <td>Software, apps, AI, cybersecurity, cloud computing</td>
-        <td>Increases productivity, connects communities, enables e-governance and education</td>
-      </tr>
-      <tr>
-        <td>Renewable Energy & Sustainability</td>
-        <td>Solar, wind, hydroelectric, electric vehicles, energy-efficient systems</td>
-        <td>Reduces carbon footprint, combats climate change, ensures sustainable development</td>
-      </tr>
-      <tr>
-        <td>Defense & Public Safety</td>
-        <td>Missile systems, cybersecurity, disaster management tools, AI surveillance</td>
-        <td>Protects national security, safeguards citizens, ensures disaster preparedness</td>
-      </tr>
-      <tr>
-        <td>Innovation & Entrepreneurship</td>
-        <td>Startups in AI, robotics, IoT, smart devices</td>
-        <td>Drives economic growth, creates jobs, fosters societal advancement</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>2. Ethical Responsibilities and Considerations</h3>
-  <table border="1" cellpadding="10" cellspacing="0">
-    <thead>
-      <tr>
-        <th>Ethical Area</th>
-        <th>Key Considerations</th>
-        <th>Examples</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Public Safety</td>
-        <td>Ensure designs, structures, and systems do not endanger human life</td>
-        <td>Civil engineers comply with building codes; software engineers prevent system failures risking safety</td>
-      </tr>
-      <tr>
-        <td>Sustainability & Environment</td>
-        <td>Avoid harm to ecosystems; reduce pollution and waste</td>
-        <td>Electrical engineers designing renewable energy systems; chemical engineers managing waste responsibly</td>
-      </tr>
-      <tr>
-        <td>Honesty & Integrity</td>
-        <td>Avoid misrepresentation, corruption, or fraudulent reporting</td>
-        <td>Accurate project reports, transparency, avoid conflicts of interest</td>
-      </tr>
-      <tr>
-        <td>Data Privacy & Cyber Ethics</td>
-        <td>Protect user data; ensure AI/software are ethical</td>
-        <td>IT professionals securing data, avoiding misuse of AI, complying with GDPR/India’s IT Act</td>
-      </tr>
-      <tr>
-        <td>Social Responsibility</td>
-        <td>Consider societal implications of technology and infrastructure</td>
-        <td>AI engineers assess algorithm bias; civil engineers design disaster-resilient infrastructure</td>
-      </tr>
-      <tr>
-        <td>Professional Conduct</td>
-        <td>Follow codes of conduct, maintain competence, and respect colleagues</td>
-        <td>Membership in IEI, IEEE, ISTE requires adherence to ethical codes and continuous professional development</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>3. Notable Codes of Ethics</h3>
-  <ul>
-    <li><strong>IEI Code of Ethics:</strong> Emphasizes competence, honesty, and service to society.</li>
-    <li><strong>IEEE Code of Ethics:</strong> "To hold paramount the safety, health, and welfare of the public..."</li>
-    <li><strong>ACM Code of Ethics:</strong> Guides IT professionals on honesty, fairness, and social responsibility in computing.</li>
-  </ul>
-
-  <h3>4. Examples of Ethical Challenges in Engineering</h3>
-  <ul>
-    <li><strong>Software Engineering:</strong> Biased AI algorithms affecting hiring, loans, or criminal justice decisions.</li>
-    <li><strong>Civil & Structural Engineering:</strong> Cutting costs in materials leading to unsafe buildings or bridges.</li>
-    <li><strong>Environmental Engineering:</strong> Improper waste disposal or neglecting environmental impact assessments.</li>
-    <li><strong>Automotive / Electrical Engineering:</strong> Ignoring safety standards in vehicles or machinery.</li>
-  </ul>
-
-  <h3>5. Summary / Key Takeaways</h3>
-  <ul>
-    <li>Engineering careers directly impact society—from infrastructure to healthcare, digital systems, and sustainable energy.</li>
-    <li>Ethical behavior is essential: public safety, environmental stewardship, data privacy, honesty, and social responsibility.</li>
-    <li>Engineers must balance innovation with ethical responsibility to ensure technology benefits society.</li>
-    <li>Professional associations (IEI, IEEE, CSI) guide engineers in ethical practices, continuing education, and socially responsible work.</li>
-  </ul>
-
-  <blockquote>
-    <em>“Engineering is not only about technical skills, it’s about creating solutions that are safe, sustainable, and beneficial for humanity.”</em>
-  </blockquote>
-</div>
-
-
-  <!-- Content Sections -->
-  <div id="home" class="content-section">Content for Overview...</div>
-  <div id="edu" class="content-section">Content for Educational Requirements...</div>
-  <div id="skills" class="content-section">Content for Skills and Abilities Needed...</div>
-  <div id="env" class="content-section">Content for Work Environment...</div>
-  <div id="growth" class="content-section">Content for Career Path and Growth Opportunities...</div>
-  <div id="salary" class="content-section">Content for Salary and Benefits...</div>
-  <div id="demand" class="content-section">Content for Employment Outlook and Demand...</div>
-  <div id="proscons" class="content-section">Content for Pros and Cons...</div>
-  <div id="rolemodel" class="content-section">Content for Famous Personalities / Role Model...</div>
-  <div id="institutions" class="content-section">Content for Institutions and Training Centers...</div>
-  <div id="associations" class="content-section">Content for Professional Associations and Networks...</div>
-  <div id="impact" class="content-section">Content for Social Impact and Ethical Considerations...</div>
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <!-- Particles + interactions -->
   <script>
-    /* Initialize particles.js */
-    particlesJS('particles-js', {
-      "particles": {
-        "number": {"value": 80, "density": {"enable": true, "value_area": 800}},
-        "color": {"value": "#ffffff"},
-        "shape": {"type": "circle"},
-        "opacity": {"value": 0.5, "random": true},
-        "size": {"value": 3, "random": true},
-        "line_linked": {"enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1},
-        "move": {"enable": true, "speed": 2, "direction": "none", "random": false, "straight": false}
-      },
-      "interactivity": {
-        "events": {
-          "onhover": {"enable": true, "mode": "repulse"},
-          "onclick": {"enable": true, "mode": "push"}
-        },
-        "modes": {"repulse": {"distance": 100}}
-      },
-      "retina_detect": true
-    });
+    // Particles init (techy lights)
+    document.addEventListener('DOMContentLoaded', ()=> {
+      const particlesOn = {on:true};
+      function initParticles(){
+        if(window.particlesJS) {
+          particlesJS('particles-js', {
+            "particles": {
+              "number": {"value":80,"density":{"enable":true,"value_area":900}},
+              "color": {"value":["#7c3aed","#3b82f6","#06b6d4","#a78bfa"]},
+              "shape": {"type":"circle"},
+              "opacity": {"value":0.6,"random":true,"anim":{"enable":false}},
+              "size": {"value":3,"random":true},
+              "line_linked": {"enable":true,"distance":160,"color":"#7c3aed","opacity":0.08,"width":1},
+              "move": {"enable":true,"speed":1.8,"direction":"none","random":false,"straight":false}
+            },
+            "interactivity": {
+              "detect_on":"canvas",
+              "events": {
+                "onhover": {"enable":true,"mode":"repulse"},
+                "onclick": {"enable":true,"mode":"push"}
+              },
+              "modes": {"repulse":{"distance":100}, "push":{"particles_nb":4}}
+            },
+            "retina_detect": true
+          });
+        }
+      }
+      initParticles();
 
-    /* Expand/Collapse content sections */
-    const buttons = document.querySelectorAll('.btn');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const targetId = btn.getAttribute('data-target');
-        const section = document.getElementById(targetId);
-
-        // Close others
-        document.querySelectorAll('.content-section').forEach(s => {
-          if(s.id !== targetId) s.style.display = 'none';
-        });
-
-        // Toggle clicked
-        section.style.display = section.style.display === 'block' ? 'none' : 'block';
-        section.classList.add('animate__animated', 'animate__fadeIn');
+      // Toggle particles
+      const toggle = document.getElementById('toggleParticles');
+      toggle.addEventListener('click', ()=>{
+        const canvas = document.getElementById('particles-js');
+        if(canvas.style.display === 'none' || canvas.style.opacity === '0'){
+          canvas.style.display = 'block'; canvas.style.opacity = '0.85';
+          toggle.textContent = 'Particles: On'; toggle.setAttribute('aria-pressed','true');
+          if(!window.pJSDom || window.pJSDom.length===0) initParticles();
+        } else {
+          canvas.style.opacity = '0'; setTimeout(()=> canvas.style.display = 'none', 300);
+          toggle.textContent = 'Particles: Off'; toggle.setAttribute('aria-pressed','false');
+        }
       });
+
+      // tiny enter animation for grid (stagger)
+      const grid = document.querySelectorAll('.card-btn');
+      grid.forEach((el,i)=> {
+        el.style.opacity = 0; el.style.transform = 'translateY(18px) scale(.995)';
+        setTimeout(()=> { el.style.transition = 'all .6s cubic-bezier(.2,.9,.2,1)'; el.style.opacity = 1; el.style.transform = 'translateY(0) scale(1)'; }, 160 + i*80);
+      });
+
+      // keyboard accessibility: Enter opens first link
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA'){
+          const first = document.querySelector('.card-btn');
+          if(first) first.click();
+        }
+      });
+
     });
   </script>
 

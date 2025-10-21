@@ -1,0 +1,87 @@
+<!-- Save as skills.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Skills & Abilities — Engineering</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+<style>
+  :root{--bg1:#05030a;--bg2:#0b0b1f;--glass-border:rgba(255,255,255,0.04);--max:1100px}
+  *{box-sizing:border-box} body{margin:0;font-family:"Poppins",sans-serif;background:linear-gradient(180deg,var(--bg1),var(--bg2));color:#e6eef8}
+  #particles-js{position:fixed; inset:0; z-index:0; pointer-events:none}
+  .page{position:relative; z-index:1; padding:28px 18px 60px; min-height:100vh}
+  header{width:100%;max-width:var(--max); margin:8px auto 20px; display:flex; justify-content:space-between; padding:12px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid var(--glass-border)}
+  .logo{width:56px;height:56px;border-radius:12px;overflow:hidden}
+  main{width:100%; max-width:var(--max); margin:18px auto; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:22px; border-radius:12px; border:1px solid var(--glass-border)}
+  h1{font-family:"Orbitron",sans-serif;margin:0 0 12px}
+  .two-col{display:grid; grid-template-columns: 1fr 1fr; gap:18px}
+  .glass-table{width:100%; border-collapse:collapse; margin-top:8px}
+  .glass-table th,.glass-table td{padding:10px;border:1px solid rgba(255,255,255,0.04)}
+  footer{max-width:var(--max); margin:26px auto; text-align:center; color:rgba(230,238,255,0.85)}
+  @media(max-width:900px){ .two-col{grid-template-columns:1fr} header{flex-direction:column;gap:10px}}
+</style>
+</head>
+<body>
+<div id="particles-js"></div>
+<div class="page">
+  <header>
+    <div style="display:flex; gap:12px; align-items:center">
+      <div class="logo"><img src="eat.png" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+      <div><div style="font-family:Orbitron, sans-serif; font-size:1.05rem">Skills & Abilities</div><div style="font-size:0.85rem;color:rgba(230,238,255,0.9)">Technical + soft skills for engineers</div></div>
+    </div>
+    <div style="display:flex; gap:10px"><a href="index.html" style="text-decoration:none;color:inherit;border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:8px">← Home</a><a href="work-environment.html" style="text-decoration:none;color:inherit;border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:8px">Next →</a></div>
+  </header>
+
+  <main role="main" aria-labelledby="main-heading">
+    <h1 id="main-heading">Skills and Abilities Needed</h1>
+
+    <div class="two-col">
+      <section>
+        <h3>Technical Skills</h3>
+        <p>Core technical skills vary by specialization but typically include:</p>
+        <table class="glass-table" role="table">
+          <thead><tr><th>Field</th><th>Key Skills</th></tr></thead>
+          <tbody>
+            <tr><td>Mechanical</td><td>CAD/CAM, Thermodynamics, Robotics, Manufacturing tools</td></tr>
+            <tr><td>Civil</td><td>Structural design, AutoCAD, Geotechnical analysis</td></tr>
+            <tr><td>Electrical</td><td>Circuit design, PLC programming, Embedded systems</td></tr>
+            <tr><td>Computer Science</td><td>Programming (Python/Java/C++), Data Structures, Cloud, AI/ML</td></tr>
+            <tr><td>Emerging Tech</td><td>IoT, Cybersecurity, Data Engineering</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h3>Soft Skills & Personal Traits</h3>
+        <p>Employers value strong interpersonal and cognitive traits:</p>
+        <table class="glass-table">
+          <thead><tr><th>Soft Skill</th><th>Why it matters</th></tr></thead>
+          <tbody>
+            <tr><td>Communication</td><td>Explain ideas, write reports, present findings</td></tr>
+            <tr><td>Teamwork</td><td>Work with multidisciplinary teams</td></tr>
+            <tr><td>Problem-solving</td><td>Identify root causes & implement fixes</td></tr>
+            <tr><td>Creativity</td><td>Innovate and improve designs</td></tr>
+            <tr><td>Adaptability</td><td>Keep up with rapid tech changes</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+
+    <section style="margin-top:18px">
+      <h3>Summary</h3>
+      <ul>
+        <li>Combine technical tools (software, instrumentation) with strong communication and teamwork.</li>
+        <li>Continuous learning (certifications) ensures long-term career growth.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>© Zainabia English Medium School — Skills & Abilities</footer>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded',()=>{ if(window.particlesJS) particlesJS('particles-js', {"particles":{"number":{"value":60},"color":{"value":["#7c3aed","#3b82f6","#06b6d4"]},"size":{"value":3},"line_linked":{"enable":true,"opacity":0.06}},"interactivity":{"events":{"onhover":{"enable":true,"mode":"repulse"}}},"retina_detect":true});});
+</script>
+</body>
+</html>

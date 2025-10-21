@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering & Technical</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Animate.css for smooth animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    header {
+      width: 100%;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 50px;
+      text-align: center;
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      font-size: 3rem;
+      text-shadow: 2px 2px 15px rgba(0,0,0,0.5);
+      animation: bounceIn 1.5s;
+    }
+
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 1200px;
+      padding: 0 20px;
+    }
+
+    .btn {
+      background: linear-gradient(45deg, #ff6a00, #ee0979, #f5af19, #ff6a00);
+      border: none;
+      padding: 18px 30px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.5s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+      background-size: 300% 300%;
+      animation: gradientBG 8s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
+    }
+
+    .btn:hover {
+      transform: translateY(-7px) scale(1.05);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+      text-shadow: 0 0 10px #fff;
+    }
+
+    .content-section {
+      max-width: 1000px;
+      background: rgba(0,0,0,0.5);
+      padding: 25px 35px;
+      margin: 20px 0;
+      border-radius: 15px;
+      display: none;
+      animation: fadeIn 0.8s forwards;
+      line-height: 1.7;
+    }
+
+    .content-section h2 {
+      color: #ffd700;
+      margin-bottom: 10px;
+      font-size: 1.6rem;
+    }
+
+    .content-section ul {
+      margin-left: 20px;
+      list-style-type: disc;
+      margin-bottom: 15px;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @media (max-width: 768px) {
+      .btn {
+        padding: 15px 20px;
+        font-size: 1rem;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Particle background -->
+  <div id="particles-js"></div>
+
+  <!-- Top Image Space -->
+  <header>
+    <h1>Engineering & Technical</h1>
+  </header>
+
+  <!-- Buttons -->
+  <div class="button-container">
+    <button class="btn" data-target="definition">Overviwe</button>
+    <button class="btn" data-target="skills">Skills and Abilities Needed</button>
+    <button class="btn" data-target="env">Work Environment</button>
+    <button class="btn" data-target="growth">Career Path and Growth Opportunities</button>
+    <button class="btn" data-target="salary">Salary and Benefits</button>
+    <button class="btn" data-target="demand">Employment Outlook and Demand</button>
+    <button class="btn" data-target="proscons">Pros and Cons</button>
+    <button class="btn" data-target="rolemodel">Famous Personalities / Role Model</button>
+    <button class="btn" data-target="institutions">Institutions and Training Centers</button>
+    <button class="btn" data-target="associations">Professional Associations and Networks</button>
+    <button class="btn" data-target="impact">Social Impact and Ethical Considerations</button>
+  </div>
+
+  <!-- Content Sections -->
+  <div id="definition" class="content-section">
+    <h2>Definition and Description of the Field</h2>
+    <p>Engineering and Technical fields involve the application of scientific, mathematical, and technological principles to design, develop, maintain, and improve structures, machines, systems, software, and processes. It is a broad domain that combines theory and practice to solve practical problems and create innovative solutions in various industries.</p>
+    <p>In India, engineering is considered a key driver of industrial growth, technological advancement, and infrastructure development. The field is constantly evolving due to advances in digital technology, AI, robotics, renewable energy, and manufacturing innovations.</p>
+    <p><strong>Key aspects:</strong></p>
+    <ul>
+      <li>Problem-solving oriented</li>
+      <li>Focuses on designing, developing, testing, and maintaining solutions</li>
+      <li>Often requires collaboration with multidisciplinary teams</li>
+    </ul>
+
+    <h2>Nature of Work</h2>
+    <p>Professionals in engineering and technical fields are involved in creative, analytical, and practical tasks, including:</p>
+    <ul>
+      <li><strong>Design and Development:</strong> Creating new products, machinery, software, or infrastructure solutions using engineering principles.</li>
+      <li><strong>Testing and Quality Control:</strong> Ensuring that designs and products meet safety, efficiency, and reliability standards.</li>
+      <li><strong>Research and Innovation:</strong> Developing advanced technologies, improving materials, or optimizing processes.</li>
+      <li><strong>Maintenance and Troubleshooting:</strong> Maintaining machines, systems, or networks and solving technical issues.</li>
+      <li><strong>Project Management:</strong> Planning, coordinating, and supervising engineering projects from concept to completion.</li>
+      <li><strong>Consulting and Advisory:</strong> Providing expert guidance on technical solutions, feasibility, and cost optimization.</li>
+    </ul>
+    <p>For example, a civil engineer designs buildings or roads, an IT engineer develops software solutions, and a mechanical engineer designs machinery or manufacturing processes.</p>
+
+    <h2>Typical Roles and Job Titles</h2>
+    <ul>
+      <li><strong>Mechanical and Civil Engineering:</strong> Mechanical Engineer, Civil Engineer, Structural Engineer, Project Engineer, Design Engineer</li>
+      <li><strong>Electrical, Electronics, and Computer Engineering:</strong> Electrical Engineer, Electronics Engineer, Embedded Systems Engineer, Software Engineer/Developer, Network Engineer</li>
+      <li><strong>Industrial and Manufacturing Engineering:</strong> Production Engineer, Process Engineer, Quality Control Engineer, Maintenance Engineer</li>
+      <li><strong>Emerging Tech Fields:</strong> AI/ML Engineer, Robotics Engineer, Data Scientist, Renewable Energy Engineer, Cybersecurity Specialist</li>
+    </ul>
+
+    <h2>Type of Industries or Sectors</h2>
+    <ul>
+      <li><strong>Infrastructure & Construction:</strong> Roads, bridges, housing, urban planning.</li>
+      <li><strong>Information Technology & Software:</strong> Software development, IT services, cloud computing, cybersecurity.</li>
+      <li><strong>Manufacturing & Industrial:</strong> Automotive, aerospace, electronics, heavy machinery.</li>
+      <li><strong>Energy & Power:</strong> Renewable energy, power plants, oil & gas, electricity distribution.</li>
+      <li><strong>Telecommunications & Electronics:</strong> Network systems, mobile tech, embedded systems.</li>
+      <li><strong>Research & Development:</strong> Government labs, private R&D centers, academic institutions.</li>
+      <li><strong>Consulting & Project Management:</strong> Technical consultancy firms and project execution companies.</li>
+    </ul>
+  </div>
+
+  <!-- Placeholder content for other sections -->
+  <div id="skills" class="content-section">Content for Skills and Abilities Needed...</div>
+  <div id="env" class="content-section">Content for Work Environment...</div>
+  <div id="growth" class="content-section">Content for Career Path and Growth Opportunities...</div>
+  <div id="salary" class="content-section">Content for Salary and Benefits...</div>
+  <div id="demand" class="content-section">Content for Employment Outlook and Demand...</div>
+  <div id="proscons" class="content-section">Content for Pros and Cons...</div>
+  <div id="rolemodel" class="content-section">Content for Famous Personalities / Role Model...</div>
+  <div id="institutions" class="content-section">Content for Institutions and Training Centers...</div>
+  <div id="associations" class="content-section">Content for Professional Associations and Networks...</div>
+  <div id="impact" class="content-section">Content for Social Impact and Ethical Considerations...</div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS('particles-js', {
+      "particles": {
+        "number": {"value": 80, "density": {"enable": true, "value_area": 800}},
+        "color": {"value": "#ffffff"},
+        "shape": {"type": "circle"},
+        "opacity": {"value": 0.5, "random": true},
+        "size": {"value": 3, "random": true},
+        "line_linked": {"enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1},
+        "move": {"enable": true, "speed": 2, "direction": "none", "random": false, "straight": false}
+      },
+      "interactivity": {
+        "events": {
+          "onhover": {"enable": true, "mode": "repulse"},
+          "onclick": {"enable": true, "mode": "push"}
+        },
+        "modes": {"repulse": {"distance": 100}}
+      },
+      "retina_detect": true
+    });
+
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        const section = document.getElementById(targetId);
+
+        // Close others
+        document.querySelectorAll('.content-section').forEach(s => {
+          if(s.id !== targetId) s.style.display = 'none';
+        });
+
+        // Toggle clicked
+        section.style.display = section.style.display === 'block' ? 'none' : 'block';
+        section.classList.add('animate__animated', 'animate__fadeIn');
+      });
+    });
+  </script>
+
+</body>
+</html>
