@@ -8,98 +8,131 @@
   <style>
     body {
       margin: 0;
-      background: radial-gradient(circle at top, #050312, #0c0120 80%);
+      background: radial-gradient(circle at top, #060218, #0b0228 80%);
       color: #e6eef8;
       font-family: 'Poppins', sans-serif;
       text-align: center;
       min-height: 100vh;
     }
+
     header {
       padding: 30px 10px;
-      background: linear-gradient(90deg, rgba(0,255,247,0.05), rgba(255,0,200,0.05));
+      background: linear-gradient(90deg, rgba(0,255,247,0.08), rgba(255,0,200,0.08));
       border-bottom: 1px solid rgba(255,255,255,0.1);
       box-shadow: 0 0 25px rgba(0,255,247,0.15);
     }
+
     header h1 {
       font-family: 'Orbitron', sans-serif;
       color: #00fff7;
       font-size: 2rem;
       text-shadow: 0 0 20px rgba(0,255,247,0.4);
+      letter-spacing: 1px;
     }
+
     .graphs {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 30px;
-      padding: 40px 20px;
+      gap: 40px;
+      padding: 50px 20px;
     }
+
     .graph-card {
       background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(0,255,247,0.08);
-      padding: 20px;
-      max-width: 800px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      box-shadow: 0 0 30px rgba(0,255,247,0.15);
+      padding: 25px;
+      max-width: 850px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
     .graph-card:hover {
       transform: scale(1.03);
-      box-shadow: 0 0 40px rgba(0,255,247,0.2);
+      box-shadow: 0 0 50px rgba(0,255,247,0.25);
     }
+
     img {
       width: 100%;
       border-radius: 10px;
       display: block;
+      box-shadow: 0 0 20px rgba(0,255,247,0.15);
     }
-    .source-btn {
-      margin-top: 30px;
+
+    .graph-text {
+      margin-top: 15px;
+      font-size: 1rem;
+      color: rgba(230,238,255,0.9);
+      line-height: 1.6;
+    }
+
+    .home-btn {
+      margin-top: 50px;
       background: linear-gradient(90deg, #00fff7, #ff00c8);
+      color: #0b0228;
+      font-weight: 700;
       border: none;
-      color: #050312;
-      font-weight: bold;
-      padding: 14px 28px;
       border-radius: 10px;
+      padding: 14px 28px;
+      font-size: 1rem;
       cursor: pointer;
-      box-shadow: 0 0 30px rgba(0,255,247,0.25);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 20px rgba(0,255,247,0.2);
+      transition: all 0.3s ease;
     }
-    .source-btn:hover {
+
+    .home-btn:hover {
       transform: translateY(-4px) scale(1.05);
-      box-shadow: 0 0 40px rgba(255,0,200,0.3);
+      box-shadow: 0 0 40px rgba(0,255,247,0.4);
     }
+
     footer {
-      padding: 15px;
-      background: rgba(0,0,0,0.4);
-      border-top: 1px solid rgba(255,255,255,0.05);
+      margin-top: 50px;
+      padding: 20px;
+      color: rgba(255,255,255,0.6);
       font-size: 0.9rem;
-      color: rgba(230,238,255,0.8);
+      border-top: 1px solid rgba(255,255,255,0.1);
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Engineering & Technical Career Graphs (India)</h1>
+    <h1>Engineering & Technical Career Insights (2015–2024)</h1>
   </header>
 
   <div class="graphs">
+
+    <!-- Graph 1 -->
     <div class="graph-card">
-      <h2>Job Opportunities (2015–2024)</h2>
-      <img src="1.jpeg" alt="Engineering & Technology Job Opportunities (2015–2024)">
+      <img src="1.jpeg" alt="Engineering Job Opportunities (2015–2024)">
+      <div class="graph-text">
+        <strong>Graph 1:</strong> This graph shows the steady rise in job opportunities within the
+        Engineering & Technology sector from 2015 to 2024. The consistent upward trend reflects India’s
+        growing focus on digital transformation, infrastructure expansion, and technological innovation.
+      </div>
     </div>
 
+    <!-- Graph 2 -->
     <div class="graph-card">
-      <h2>Placed vs Unplaced Engineering Graduates (2015–2024)</h2>
-      <img src="2.jpeg" alt="Placed vs Unplaced Engineering Graduates in India (2015–2024)">
+      <img src="2.jpeg" alt="Placed vs Unplaced Engineering Graduates (2015–2024)">
+      <div class="graph-text">
+        <strong>Graph 2:</strong> This comparison highlights the placement rate of engineering graduates
+        versus those still seeking employment. Although placement numbers have improved over time, the
+        need for enhanced skill development and industry-relevant education remains crucial.
+      </div>
     </div>
 
-    <button class="source-btn" onclick="window.open('https://www.aicte-india.org/', '_blank')">
-      🔗 View Official Sources
-    </button>
+    <!-- Home Button -->
+    <a href="index.html">
+      <button class="home-btn">🏠 Back to Home</button>
+    </a>
+
   </div>
 
   <footer>
-    Source: AICTE India, NASSCOM Tech Report 2024, India Skill Report 2024.
+    Data based on trends from AICTE, NASSCOM & Ministry of Skill Development Reports (2015–2024).  
+    <br>Designed by Aditya Raut | Zainabia English Medium School.
   </footer>
 
 </body>
